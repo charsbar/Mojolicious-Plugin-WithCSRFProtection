@@ -1,0 +1,51 @@
+---
+sudo: false
+addons:
+  apt:
+    packages:
+      - aspell
+      - aspell-en
+language: perl
+perl:
+  - blead
+  - dev
+  - '5.24'
+  - '5.22'
+  - '5.20'
+  - '5.18'
+  - '5.16'
+  - '5.14'
+  - '5.12'
+  - '5.10'
+matrix:
+  allow_failures:
+    - perl: blead
+  include:
+    - env: COVERAGE=1
+      perl: '5.24'
+env:
+  global:
+    - RELEASE_TESTING=1
+    - AUTHOR_TESTING=1
+before_install:
+  - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
+  - source ~/travis-perl-helpers/init
+  - build-perl
+  - perl -V
+  - build-dist
+  - cd $BUILD_DIR
+install:
+  - cpan-install ExtUtils::MakeMaker~6.68 --deps
+script:
+  - perl Makefile.PL
+  - make
+  - prove -br -j$(test-jobs) $(test-files)
+notifications:
+  email:
+    on_failure: always
+    on_success: change
+    recipients:
+      - dev-ci@maxmind.com
+  slack:
+    rooms:
+      secure: "ZgKB0b8S5WMVz2Q+okSbhxVWx9ng0bh+E9K7znUVIZkQ5Ad+72hhmmFhB24+Hjp5lvWT84R84RgQsLU+/fcXs81w2kOn+z73oiYA7PZuZSPoKnM5d3uWAck0pfxHcZjinNLe2aueft/5/en1DismQ0eaK2zLsJ6ejSxDA0kQSDDHX0T6WGtlIDGDqq6Nq/Gc7EE6Baj0DDTtDb5jZ55rFo8caw36Pw9fGIY1CrgEXeFFWWZFVhP3PmctmpQpXb4Cd4NGU71MPcGzS/218P/HnM4ZUSQNJ12M8KmGsAl0Yl7Y04/gEGNNc0nx0RrMDxkksKQHKhUYsSDtLcaZMpKiWHrph6KxvcUl8gqhUc6b7i3eE5F0KmtMYH2kjKWyPxEBPV04zLUhRlWhnX1zE7Jn8g8ybkceyAa6o65tkEWahQvwh/s+m6a/ZEdwsqEelEEp8J9eaoHLcgK37LjDDbK3PRRbvmmaKuGFlAYHvLc2zLlW3o8YcynZx8naa+2oTwkM7/kLYzKuDLuuOKM7cNu1+JUcx8cvZglazZVg3Om0xTlvNq8TuivbE82Y1hMe6MwtHXZX5RUkKPHRf7znibhdEgZ7OeD/zJ/Kri9w7NZytJhyXa7MbCG2aIPdYQFOt+keDcnUMUDHiIOKb1GAyDE0l10u47r2nKj2QVNxyXQ8rE8=\n"
