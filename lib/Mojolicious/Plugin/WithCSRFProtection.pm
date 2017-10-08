@@ -6,37 +6,6 @@ use Mojo::Base 'Mojolicious::Plugin';
 
 our $VERSION = '1.00';
 
-=head1 SYNOPSIS
-
-   # in a lite application
-   post '/some-url' => ( with_csrf_protection => 1 ) => sub { ... };
-
-   # in a full application
-   $app->routes->post('/some-url')
-               ->with_csrf_protection
-               ->to(...);
-
-=head1 DESCRIPTION
-
-This Mojolicious plugin provides a routing condition (called
-C<with_csrf_protection>) and routing shortcut to add that condition (also called
-C<with_csrf_protection>) that can be used to protect against cross site request
-forgery.
-
-Adding the condition to the route checks a valid CSRF token was passed, either
-in the C<X-CSRF-Token> HTTP header or in the C<crsf_token> parameter.
-
-Failing the CSRF check causes a 403 error and the C<bad_csrf> template to be
-rendered, or if no such template is found a simple error string to be
-output. This behavior is unlike most conditions that can be applied to
-Mojolicious routes that normally just cause the route matching to fail and
-alternative subsequent routes to be evaluated, but immediately returning an
-error response makes sense for a failed CSRF check.  The actual error rendering
-is performed by the C<reply.bad_csrf> helper that this plugin installs, and if
-you want different error output you should override that helper.
-
-=cut
-
 sub register {
     my ( $self, $app ) = @_;
 
@@ -81,6 +50,35 @@ sub register {
 1;
 
 __END__
+
+=head1 SYNOPSIS
+
+   # in a lite application
+   post '/some-url' => ( with_csrf_protection => 1 ) => sub { ... };
+
+   # in a full application
+   $app->routes->post('/some-url')
+               ->with_csrf_protection
+               ->to(...);
+
+=head1 DESCRIPTION
+
+This Mojolicious plugin provides a routing condition (called
+C<with_csrf_protection>) and routing shortcut to add that condition (also called
+C<with_csrf_protection>) that can be used to protect against cross site request
+forgery.
+
+Adding the condition to the route checks a valid CSRF token was passed, either
+in the C<X-CSRF-Token> HTTP header or in the C<crsf_token> parameter.
+
+Failing the CSRF check causes a 403 error and the C<bad_csrf> template to be
+rendered, or if no such template is found a simple error string to be
+output. This behavior is unlike most conditions that can be applied to
+Mojolicious routes that normally just cause the route matching to fail and
+alternative subsequent routes to be evaluated, but immediately returning an
+error response makes sense for a failed CSRF check.  The actual error rendering
+is performed by the C<reply.bad_csrf> helper that this plugin installs, and if
+you want different error output you should override that helper.
 
 =head1 EXAMPLES
 
@@ -177,5 +175,4 @@ condition)
         ->to('nuke#launch');
    ...
  }
-
 
