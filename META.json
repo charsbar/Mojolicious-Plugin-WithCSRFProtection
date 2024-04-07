@@ -73,7 +73,7 @@
          "web" : "https://github.com/charsbar/Mojolicious-Plugin-WithCSRFProtection"
       }
    },
-   "version" : "1.00",
+   "version" : "1.01",
    "x_contributors" : [
       "Greg Oschwald <goschwald@maxmind.com>",
       "Kenichi Ishigaki <ishigaki@cpan.org>"
