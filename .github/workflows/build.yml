@@ -32,4 +32,4 @@ jobs:
       - name: Install dependencies
         run: cpanm --installdeps .
       - name: Run tests
-        run: perl Makefile.PL && make && make test
+        run: perl Build.PL && ./Build && ./Build test
