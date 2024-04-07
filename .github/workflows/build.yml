@@ -1,0 +1,35 @@
+name: build
+
+on:
+  push:
+    branches:
+      - '*'
+    tags-ignore:
+      - '*'
+  pull_request:
+
+jobs:
+  perl:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        mojolicious-version:
+          - 'Mojolicious'
+          - 'Mojolicious@8.72'
+          - 'Mojolicious@8.43'
+          - 'Mojolicious@7.94'
+
+    container:
+      image: perl:latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: perl -V
+        run: perl -V
+      - name: install Mojolicious
+        run: cpanm ${{ matrix.mojolicious-version }}
+      - name: Install dependencies
+        run: cpanm --installdeps .
+      - name: Run tests
+        run: perl Makefile.PL && make && make test
