@@ -1,11 +1,3 @@
-# NAME
-
-Mojolicious::Plugin::WithCSRFProtection - Mojolicious plugin providing CSRF protection at the routing level
-
-# VERSION
-
-version 1.00
-
 # SYNOPSIS
 
     # in a lite application
@@ -131,21 +123,13 @@ condition)
       ...
     }
 
-# SUPPORT
-
-Bugs may be submitted through [https://github.com/maxmind/Mojolicious-Plugin-WithCSRFProtection/issues](https://github.com/maxmind/Mojolicious-Plugin-WithCSRFProtection/issues).
-
 # AUTHOR
 
 Mark Fowler <mfowler@maxmind.com>
 
-# CONTRIBUTOR
-
-Greg Oschwald <goschwald@maxmind.com>
-
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2017 by MaxMind, Inc.
+This software is copyright (c) 2016 by MaxMind, Inc..
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
