@@ -28,7 +28,7 @@ jobs:
       - name: perl -V
         run: perl -V
       - name: install Mojolicious
-        run: cpanm ${{ matrix.mojolicious-version }}
+        run: cpanm -n ${{ matrix.mojolicious-version }}
       - name: Install dependencies
         run: cpanm --installdeps .
       - name: Run tests
