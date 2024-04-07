@@ -2,3 +2,12 @@
 .build
 Mojolicious-Plugin-WithCSRFProtection-*
 
+/Mojolicious-Plugin-WithCSRFProtection-*
+/.build
+/_build_params
+/Build
+/Build.bat
+!Build/
+!META.json
+!LICENSE
+*.swp
