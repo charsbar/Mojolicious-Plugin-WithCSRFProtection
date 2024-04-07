@@ -40,7 +40,11 @@ sub register {
     $routes->add_shortcut(
         with_csrf_protection => sub {
             my ($route) = @_;
-            return $route->over( with_csrf_protection => 1 );
+            if ($Mojolicious::VERSION >= 9) {
+                return $route->requires( with_csrf_protection => 1 );
+            } else {
+                return $route->over( with_csrf_protection => 1 );
+            }
         }
     );
 
