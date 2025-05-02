@@ -29,7 +29,7 @@ sub register {
                 || $c->param('csrf_token');
 
             unless ( $csrf && $csrf eq $c->csrf_token ) {
-                $c->reply->bad_csrf;
+                $c->reply->bad_csrf unless $c->stash->{'mojo.finished'};
                 return;
             }
 
