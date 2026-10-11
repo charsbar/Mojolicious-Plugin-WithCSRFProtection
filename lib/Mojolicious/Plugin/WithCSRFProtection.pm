@@ -4,7 +4,7 @@ package Mojolicious::Plugin::WithCSRFProtection;
 
 use Mojo::Base 'Mojolicious::Plugin';
 
-our $VERSION = '1.02';
+our $VERSION = '1.03';
 
 sub register {
     my ( $self, $app ) = @_;
