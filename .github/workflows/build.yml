@@ -16,6 +16,7 @@ jobs:
       matrix:
         mojolicious-version:
           - 'Mojolicious'
+          - 'Mojolicious@9.47'
           - 'Mojolicious@8.72'
           - 'Mojolicious@8.43'
           - 'Mojolicious@7.94'
