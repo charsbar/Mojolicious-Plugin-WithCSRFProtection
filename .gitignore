@@ -11,3 +11,5 @@ Mojolicious-Plugin-WithCSRFProtection-*
 !META.json
 !LICENSE
 *.swp
+/MYMETA.*
+/blib
